@@ -6,6 +6,7 @@ import (
 )
 
 // 切片进阶
+// append对未初始化的切片操作时，会自动初始化切片，并扩容
 
 func main() {
 	s1 := []string{"a", "b", "c", "d"}
@@ -27,7 +28,7 @@ func main() {
 	// 复制 copy
 	a1 := []int{1, 2, 3}
 	a2 := a1
-	a3 := make([]int, 3, 3)
+	a3 := make([]int, 3, 3) // var a3 []int //会发生什么?  a3 := make([]int , 0, 3) // 会发生什么？
 	// 将 a1 的底层数组元素拷贝到 a3 中，相当于把切片所指向的数组开辟了一块内存出来，不与原来的放在一起
 	copy(a3, a1)
 	fmt.Println(a1, a2, a3)
@@ -56,5 +57,15 @@ func main() {
 		d1 = append(d1, i)
 	}
 	fmt.Println(d1) //[0 0 0 0 0 0 1 2 3 4 5 6 7 8 9]
+
+	// 考验对copy的理解，对切片内存的理解
+	k1 := []int{1, 2, 3}
+	k2 := k1
+	// var k3 []int   // 未初始化，k3 为 nil
+	// k3 := make([]int, 0, 3) // 虽然初始化了容量，但是没有允许拷贝的位置空间
+	k3 := make([]int, 3, 3)
+	copy(k3, k1)
+	k1[1] = 200             // 修改 底层数组的值
+	fmt.Println(k1, k2, k3) // [1 2 3] [1 2 3] ?
 
 }

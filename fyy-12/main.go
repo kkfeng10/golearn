@@ -8,7 +8,7 @@ func main() {
 	var a1 []int
 	var a2 []string
 	fmt.Println(a1, a2)
-	fmt.Println(a1 == nil) // 切片为空
+	fmt.Println(a1 == nil) // 切片为空， nil表示未分配内存
 	// 初始化
 	a1 = []int{1, 2, 3}
 	a2 = []string{"a", "b", "c"}
