@@ -8,6 +8,11 @@ import "fmt"
 // 返回值一定要声明其类型
 // Go语言中函数没有默认参数这个概念
 
+// defer 函数内延迟执行
+
+// 注意： 函数中 return语句在底层并不是原子操作，它分为赋值和ret指令2个步骤
+// 而 defer 语句执行的时机就在返回值赋值操作后，ret指令执行前
+
 // 定义函数,有返回值,提前命名，声明了一个变量ret
 func sum1(a int, b int) (ret int) {
 	ret = a + b + 2
@@ -39,10 +44,53 @@ func sum6(a, b int, c, d, string, e, f bool) string {
 	return "abc"
 }
 
-// 可变参数, b是切片类型
+// 可变参数, b是切片类型，表示若干个int类型，只能最后一个写
 func sum7(a int, b ...int) string {
 	fmt.Printf("sum7,b type is  %T\n", b) // []int 类型
 	return "abc"
+}
+
+// defer 延迟执行函数，在函数将要推出的时候执行， 多用于函数结束之前释放资源
+// 一个函数中可以有多个defer语句，按照后进先出的顺序延迟执行
+func deferdemon() {
+	fmt.Println("打开文件")
+	defer fmt.Println("开始关闭文件") // 最先放进去的，最后执行
+	defer fmt.Println("准备关闭文件") // 最后放进去的，最先执行
+	fmt.Println("开始执行")
+}
+
+// 使用未命名的返回值，返回值为1，修改的是x ，不是返回值
+func defer1() int {
+	x := 1
+	defer func() {
+		x++
+	}()
+	return x
+}
+
+// 使用有命名的返回值，返回值为6，return 先赋值给x, defer延迟执行函数修改x的值，最后执行RET 返回x
+func defer2() (x int) {
+	defer func() {
+		x++
+	}()
+	return 5
+}
+
+// 使用有命名的返回值，返回值6, return 先将x赋值给y, defer 延迟修改x的值，但是不影响y的返回值
+func defer3() (y int) {
+	x := 5
+	defer func() {
+		x++
+	}()
+	return x
+}
+
+// 使用有命名的返回值，返回值为5，return 先将x赋值为5， 然后将x作为参数传递给defer函数，defer函数修改的是作用域在defer函数体内形参的值，不会对原本x造成影响
+func defer4() (x int) {
+	defer func(x int) {
+		x++
+	}(x)
+	return 5
 }
 
 func main() {
@@ -53,13 +101,13 @@ func main() {
 	fmt.Println(sum5(7, 8))
 	fmt.Println(sum7(10, 11))
 
-	a1 := []int{1, 2, 3}
-	a2 := a1
-	// var a3 []int   // 未初始化，a3 为 nil
-	// a3 := make([]int, 0, 3) // 虽然初始化了容量，但是没有允许拷贝的位置空间
-	a3 := make([]int, 3, 3)
-	copy(a3, a1)
-	a1[1] = 200             // 修改 底层数组的值
-	fmt.Println(a1, a2, a3) // [1 2 3] [1 2 3] []
+	// 无法再命名函数中声明命名函数
+	// func sum8(x,y int) int{
+	// 	return x+y
+	// }
+
+	deferdemon()
+	fmt.Println(defer1())
+	fmt.Println(defer2())
 
 }
