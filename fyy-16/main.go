@@ -93,6 +93,23 @@ func defer4() (x int) {
 	return 5
 }
 
+// 返回5，defer函数没有返回值接收
+func defer5() (x int) {
+	defer func(x int) int {
+		x++
+		return x
+	}(x)
+	return 5
+}
+
+// 返回6，传递一个指针，defer函数直接到内存中修改返回值
+func defer6() (x int) {
+	defer func(x *int) {
+		(*x)++
+	}(&x)
+	return 5
+}
+
 func main() {
 	r1 := sum1(1, 2)
 	fmt.Println(r1)
@@ -109,5 +126,7 @@ func main() {
 	deferdemon()
 	fmt.Println(defer1())
 	fmt.Println(defer2())
+	fmt.Println(defer5())
+	fmt.Println(defer6())
 
 }
