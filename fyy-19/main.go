@@ -4,6 +4,7 @@ import "fmt"
 
 // defer面试题
 // 秘诀： defer 虽然在最后执行，但是在注册的时候参数状态是不会在后面发生改变的
+// 调用defer的过程其实就是入栈出栈的过程
 
 func deferPractis(x string, a int, b int) (ret int) {
 	ret = a + b
