@@ -32,11 +32,13 @@ func main() {
 
 	// 声明变量的同时赋值
 	var s4 string = "yyf"
+	var s7 = string("yyf")
 	// 类型推导(根据值来判断)
 	var s5 = "yyf5"
 	// 简短变量声明,只能在函数里面用
 	s6 := "yyf6"
-	fmt.Println(s4, s5, s6)
+	s8 := string("yyf8")
+	fmt.Println(s4, s5, s6, s7, s8)
 	// 较为常用的，声明全局变量，用批量声明
 	// 声明局部变量，用 := 声明
 	// 有较为特殊的场景，用 var s5 = "yyf5" 声明
@@ -47,5 +49,3 @@ func main() {
 	// s1 := 123
 	fmt.Println(x)
 }
-
-
