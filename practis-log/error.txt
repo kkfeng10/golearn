@@ -1,0 +1,7 @@
+ERROR: 2020/06/15 12:16:27 /Users/yaoyifeng/go/src/github.com/kkfeng10/golearn/practis-log/mylog.go:72: Error log
+ERROR: 2020/06/15 12:26:36 /Users/yaoyifeng/go/src/github.com/kkfeng10/golearn/practis-log/mylog.go:72: Error log
+ERROR: 2020/06/16 09:49:52 /Users/yaoyifeng/go/src/github.com/kkfeng10/golearn/practis-log/mylog.go:112: 很差，非常差
+WARNING: 2020/06/16 09:51:54 /Users/yaoyifeng/go/src/github.com/kkfeng10/golearn/practis-log/mylog.go:108: 告警了，老哥
+ERROR: 2020/06/16 09:51:54 /Users/yaoyifeng/go/src/github.com/kkfeng10/golearn/practis-log/mylog.go:112: 很差，非常差
+WARNING: 2020/06/16 10:17:07 /Users/yaoyifeng/go/src/github.com/kkfeng10/golearn/practis-log/mylog.go:109: 告警了，老哥
+ERROR: 2020/06/16 10:17:07 /Users/yaoyifeng/go/src/github.com/kkfeng10/golearn/practis-log/mylog.go:113: 很差，非常差

@@ -16,11 +16,11 @@ import (
 // []byte 自定义缓存读取数据
 func readFromByte(fpath string) {
 	file, err := os.Open(fpath)
+	defer file.Close()
 	if err != nil {
 		fmt.Printf("打开文件 %s 错误, %v\n", fpath, err)
 		return
 	}
-	defer file.Close()
 	var buf []byte
 	buf = make([]byte, 128)
 	for {
@@ -41,11 +41,11 @@ func readFromByte(fpath string) {
 // bufio逐行读取
 func readFrombufio(fpath string) {
 	file, err := os.Open(fpath)
+	defer file.Close()
 	if err != nil {
 		fmt.Printf("打开文件 %s 错误, %v\n", fpath, err)
 		return
 	}
-	defer file.Close()
 	reader := bufio.NewReader(file)
 	for {
 		str, err := reader.ReadString('\n') // 返回字符串
