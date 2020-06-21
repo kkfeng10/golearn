@@ -2,7 +2,7 @@ package main
 
 // 写入文件 , os.OpenFile(name string, flag int, perm FileMode) (*File,error){...}
 
-// flag 的选项如下
+// flag 的选项如下,使用16进制表示，可以使用逻辑运算来表示这个flag的值
 // os.O_WRONLY 只写
 // os.O_CREATE 创建文件
 // os.O_RDONLY 只读
